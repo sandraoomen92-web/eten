@@ -1,1 +1,164 @@
-import streamlit as st import random # ----------------------------------------------------------------------------- # 1. DE MENU-BANK (4 Weken x 4 Dagen x Meerdere opties per dag) # Hier kun je eenvoudig je eigen gerechten toevoegen of aanpassen! # ----------------------------------------------------------------------------- MENU_BANK = { "Week 1": { "Dag 1 (Snel & Makkelijk)": ["Pasta Pesto met Kip", "Wraps met Kipsalon", "Maaltijdsalade met Geitenkaas"], "Dag 2 (Oven & Comfort)": ["Groente Quiche", "Lasagne Bolognese", "Ovenschotel Prei-Gehakt"], "Dag 3 (Aziatisch)": ["Nasi Goreng met Kipsaté", "Thaise Groente Curry", "Teriyaki Zalm met Rijst"], "Dag 4 (Weekend/Klassieker)": ["Zelfgemaakte Smash Burgers", "Verse Pizza", "Kipschnitzel met Friet & Salade"] }, "Week 2": { "Dag 1 (Snel & Makkelijk)": ["Shakshuka met Brood", "Gevulde Pita Falafel", "Stamppot Rauwe Andijvie"], "Dag 2 (Oven & Comfort)": ["Moussaka", "Kabeljauw uit de oven", "Pasta al Forno"], "Dag 3 (Aziatisch)": ["Pad Thai met Garnalen", "Roti met Kip", "Bami Goreng"], "Dag 4 (Weekend/Klassieker)": ["Mexicaanse Taco's", "Biefstuk met Pepersaus", "Burrito's met Gehakt"] }, "Week 3": { "Dag 1 (Snel & Makkelijk)": ["Gnocchi met Spinazie & Room", "Tortellini in Tomatensaus", "Couscous Salade"], "Dag 2 (Oven & Comfort)": ["Herderspastei (Shepherd's Pie)", "Ovenschotel Bloemkool", "Gevulde Paprika's"], "Dag 3 (Aziatisch)": ["Poké Bowl met Zalm", "Chili Con Carne", "Ramen Soep met Ei"], "Dag 4 (Weekend/Klassieker)": ["Gourmetten / Grillen", "Spareribs uit de oven", "Zelfgemaakte Kapsalon"] }, "Week 4": { "Dag 1 (Snel & Makkelijk)": ["Risotton met Paddenstoelen", "Maaltijdsoep met Stokbrood", "Quesadilla's"], "Dag 2 (Oven & Comfort)": ["Vispotje met Aardappelpuree", "Cannelloni met Ricotta", "Gehaktbrood"], "Dag 3 (Aziatisch)": ["Udon Noodles met Biefstuk reepjes", "Indonesische Rendang", "Chicken Tikka Masala"], "Dag 4 (Weekend/Klassieker)": ["Pulled Pork Sandwiches", "Loaded Fries", "BBQ Spiesjes"] } } # ----------------------------------------------------------------------------- # 2. STREAMLIT INTERFACE # ----------------------------------------------------------------------------- st.set_page_config(page_title="Wat Eten We Deze Week?", page_icon="🍲", layout="centered") st.title("🍲 Wat Eten We Deze Week?") st.write("Kies de week en druk op de knop om te bepalen wat er op tafel komt!") st.divider() # Week Selectie gekozen_week = st.selectbox("👉 **Kies de week:**", list(MENU_BANK.keys())) st.write("") # De Magische Knop if st.button("🎲 Genereer Menu voor " + gekozen_week, type="primary", use_container_width=True): st.subheader(f"📋 Menu voor {gekozen_week}:") # Haal de dagen van de gekozen week op dagen = MENU_BANK[gekozen_week] # Kies per dag 1 willekeurige optie for dag_naam, opties in dagen.items(): gekozen_gerecht = random.choice(opties) # Mooie weergave per dag with st.container(): st.markdown(f"**{dag_naam}**") st.success(f"👉 **{gekozen_gerecht}**") st.caption(f"*Keuze uit:* {', '.join(opties)}") st.write("") else: st.info("👆 Druk op de knop hierboven om het menu samen te stellen.") 
+import streamlit as st
+import random
+
+# -----------------------------------------------------------------------------
+# 1. DE MENU-BANK
+#    4 Weken x 4 Dagen x Meerdere opties per dag
+# -----------------------------------------------------------------------------
+
+MENU_BANK = {
+    "Week 1": {
+        "Dag 1 (Snel & Makkelijk)": [
+            "Pasta Pesto met Kip",
+            "Wraps met Kipsalon",
+            "Maaltijdsalade met Geitenkaas"
+        ],
+        "Dag 2 (Oven & Comfort)": [
+            "Groente Quiche",
+            "Lasagne Bolognese",
+            "Ovenschotel Prei-Gehakt"
+        ],
+        "Dag 3 (Aziatisch)": [
+            "Nasi Goreng met Kipsaté",
+            "Thaise Groente Curry",
+            "Teriyaki Zalm met Rijst"
+        ],
+        "Dag 4 (Weekend/Klassieker)": [
+            "Zelfgemaakte Smash Burgers",
+            "Verse Pizza",
+            "Kipschnitzel met Friet & Salade"
+        ]
+    },
+
+    "Week 2": {
+        "Dag 1 (Snel & Makkelijk)": [
+            "Shakshuka met Brood",
+            "Gevulde Pita Falafel",
+            "Stamppot Rauwe Andijvie"
+        ],
+        "Dag 2 (Oven & Comfort)": [
+            "Moussaka",
+            "Kabeljauw uit de oven",
+            "Pasta al Forno"
+        ],
+        "Dag 3 (Aziatisch)": [
+            "Pad Thai met Garnalen",
+            "Roti met Kip",
+            "Bami Goreng"
+        ],
+        "Dag 4 (Weekend/Klassieker)": [
+            "Mexicaanse Taco's",
+            "Biefstuk met Pepersaus",
+            "Burrito's met Gehakt"
+        ]
+    },
+
+    "Week 3": {
+        "Dag 1 (Snel & Makkelijk)": [
+            "Gnocchi met Spinazie & Room",
+            "Tortellini in Tomatensaus",
+            "Couscous Salade"
+        ],
+        "Dag 2 (Oven & Comfort)": [
+            "Herderspastei (Shepherd's Pie)",
+            "Ovenschotel Bloemkool",
+            "Gevulde Paprika's"
+        ],
+        "Dag 3 (Aziatisch)": [
+            "Poké Bowl met Zalm",
+            "Chili Con Carne",
+            "Ramen Soep met Ei"
+        ],
+        "Dag 4 (Weekend/Klassieker)": [
+            "Gourmetten / Grillen",
+            "Spareribs uit de oven",
+            "Zelfgemaakte Kapsalon"
+        ]
+    },
+
+    "Week 4": {
+        "Dag 1 (Snel & Makkelijk)": [
+            "Risotto met Paddenstoelen",
+            "Maaltijdsoep met Stokbrood",
+            "Quesadilla's"
+        ],
+        "Dag 2 (Oven & Comfort)": [
+            "Vispotje met Aardappelpuree",
+            "Cannelloni met Ricotta",
+            "Gehaktbrood"
+        ],
+        "Dag 3 (Aziatisch)": [
+            "Udon Noodles met Biefstukreepjes",
+            "Indonesische Rendang",
+            "Chicken Tikka Masala"
+        ],
+        "Dag 4 (Weekend/Klassieker)": [
+            "Pulled Pork Sandwiches",
+            "Loaded Fries",
+            "BBQ Spiesjes"
+        ]
+    }
+}
+
+
+# -----------------------------------------------------------------------------
+# 2. STREAMLIT INTERFACE
+# -----------------------------------------------------------------------------
+
+st.set_page_config(
+    page_title="Wat Eten We Deze Week?",
+    page_icon="🍲",
+    layout="centered"
+)
+
+st.title("🍲 Wat Eten We Deze Week?")
+
+st.write(
+    "Kies de week en druk op de knop om te bepalen "
+    "wat er op tafel komt!"
+)
+
+st.divider()
+
+
+# -----------------------------------------------------------------------------
+# 3. WEEK SELECTIE
+# -----------------------------------------------------------------------------
+
+gekozen_week = st.selectbox(
+    "👉 Kies de week:",
+    list(MENU_BANK.keys())
+)
+
+st.write("")
+
+
+# -----------------------------------------------------------------------------
+# 4. MENU GENEREREN
+# -----------------------------------------------------------------------------
+
+if st.button(
+    "🎲 Genereer Menu voor " + gekozen_week,
+    type="primary",
+    use_container_width=True
+):
+    st.subheader(f"📋 Menu voor {gekozen_week}:")
+
+    # Haal de dagen van de gekozen week op
+    dagen = MENU_BANK[gekozen_week]
+
+    # Kies per dag 1 willekeurige optie
+    for dag_naam, opties in dagen.items():
+        gekozen_gerecht = random.choice(opties)
+
+        # Mooie weergave per dag
+        with st.container():
+            st.markdown(f"**{dag_naam}**")
+            st.success(f"👉 **{gekozen_gerecht}**")
+            st.caption(f"*Keuze uit:* {', '.join(opties)}")
+            st.write("")
+
+else:
+    st.info(
+        "👆 Druk op de knop hierboven om het menu samen te stellen."
+    )
